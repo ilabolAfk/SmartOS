@@ -1,0 +1,299 @@
+*Все скрипты настройки*
+
+#!/bin/bash
+# ===============================================
+# SMARTOS 1.0 QUANTUM - ПОЛНЫЙ КОМПЛЕКТ СКРИПТОВ
+# ===============================================
+# Автоматическая сборка кастомного дистрибутива на базе Linux Mint
+# Использование: Запустить в Cubic после загрузки образа
+
+# ====================
+# 1. ГЛАВНЫЙ СКРИПТ
+# ====================
+#!/bin/bash
+# build.sh - основной скрипт сборки
+
+set -e
+echo "SmartOS 1.0 Quantum Build System"
+apt-get update
+apt-get install -y imagemagick desktop-file-utils sed
+
+for script in 01-wallpapers.sh 02-apps-install.sh 03-apps-rename.sh \
+              04-lightdm-config.sh 05-grub-config.sh 06-system-files.sh \
+              07-welcome-screen.sh 99-cleanup.sh; do
+    if [ -f "./scripts/$script" ]; then
+        chmod +x "./scripts/$script"
+        "./scripts/$script"
+    fi
+done
+
+echo "Сборка завершена. Готово к генерации ISO."
+
+# ====================
+# 2. СОЗДАНИЕ ОБОЕВ
+# ====================
+#!/bin/bash
+# 01-wallpapers.sh
+
+mkdir -p /usr/share/backgrounds/smartos/
+mkdir -p /usr/share/backgrounds/lightdm/
+
+convert -size 3840x2160 gradient:#36B5B0-#1A237E \
+    -fill "rgba(255,255,255,0.05)" -draw "rectangle 0,0 3840,2160" \
+    /usr/share/backgrounds/smartos/default.jpg
+
+convert -size 3840x2160 gradient:#36B5B0-#1A237E \
+    -fill white -pointsize 120 -gravity center -font "Ubuntu-Bold" \
+    -draw "text 0,-50 '⚡'" \
+    -pointsize 72 -draw "text 0,70 'SmartOS'" \
+    /usr/share/backgrounds/smartos/with-logo.jpg
+
+convert -size 1920x1080 gradient:#36B5B0-#1A237E \
+    -fill white -pointsize 72 -gravity center \
+    -draw "text 0,0 'SmartOS'" \
+    /usr/share/backgrounds/lightdm/login-bg.jpg
+
+find /usr/share/backgrounds/ -name "*.jpg" -type f | while read file; do
+    if echo "$file" | grep -q "smartos"; then continue; fi
+    cp -f /usr/share/backgrounds/smartos/default.jpg "$file"
+done
+
+# ====================
+# 3. УСТАНОВКА ПРИЛОЖЕНИЙ
+# ====================
+#!/bin/bash
+# 02-apps-install.sh
+
+apt-get update
+APT_PACKAGES="neofetch htop gparted timeshift firefox chromium-browser transmission-gtk vlc obs-studio audacity gimp inkscape libreoffice-writer libreoffice-calc libreoffice-impress git geany vim-gtk3 python3-pip filezilla remmina"
+for pkg in $APT_PACKAGES; do
+    apt-get install -y "$pkg" 2>/dev/null || true
+done
+
+# ====================
+# 4. ПЕРЕИМЕНОВАНИЕ ПРИЛОЖЕНИЙ
+# ====================
+#!/bin/bash
+# 03-apps-rename.sh
+
+declare -A APP_NAMES=(
+    ["firefox"]="SmartBrowse|Веб-браузер"
+    ["chromium-browser"]="SmartBrowse Lite|Лёгкий браузер"
+    ["vlc"]="SmartMedia|Медиаплеер"
+    ["audacity"]="SmartAudio|Редактор аудио"
+    ["gimp"]="SmartImage|Редактор изображений"
+    ["inkscape"]="SmartVector|Векторный редактор"
+    ["libreoffice-writer"]="SmartWrite|Текстовый редактор"
+    ["libreoffice-calc"]="SmartCalc|Электронные таблицы"
+    ["libreoffice-impress"]="SmartShow|Презентации"
+    ["gparted"]="SmartDisk|Менеджер дисков"
+    ["transmission-gtk"]="SmartTorrent|Торрент-клиент"
+    ["filezilla"]="SmartFTP|FTP-клиент"
+    ["remmina"]="SmartRemote|Удалённый доступ"
+    ["obs-studio"]="SmartStream|Запись и стриминг"
+)
+
+for app in "${!APP_NAMES[@]}"; do
+    IFS='|' read -r name desc <<< "${APP_NAMES[$app]}"
+    DESKTOP_FILE="/usr/share/applications/${app}.desktop"
+    if [ -f "$DESKTOP_FILE" ]; then
+        if command -v desktop-file-edit >/dev/null; then
+            desktop-file-edit --set-name="$name" --set-comment="$desc" "$DESKTOP_FILE"
+        else
+            sed -i "s/^Name=.*/Name=$name/" "$DESKTOP_FILE"
+            sed -i "s/^Comment=.*/Comment=$desc/" "$DESKTOP_FILE"
+        fi
+        sed -i "s/^Icon=.*/Icon=smartos-app/" "$DESKTOP_FILE"
+    fi
+done
+
+# ====================
+# 5. НАСТРОЙКА LIGHTDM
+# ====================
+#!/bin/bash
+# 04-lightdm-config.sh
+
+mkdir -p /etc/lightdm/lightdm.conf.d/
+mkdir -p /usr/share/backgrounds/lightdm/
+cp /usr/share/backgrounds/lightdm/login-bg.jpg /usr/share/backgrounds/lightdm/default.jpg
+
+cat > /etc/lightdm/slick-greeter.conf << 'EOF'
+[Greeter]
+background=/usr/share/backgrounds/lightdm/default.jpg
+draw-user-backgrounds=false
+theme-name=Adwaita-dark
+icon-theme-name=Adwaita
+font-name=Ubuntu 11
+clock-format=%H:%M
+show-power=true
+show-hostname=true
+show-keyboard=true
+EOF
+
+cat > /etc/lightdm/lightdm.conf.d/99-smartos.conf << 'EOF'
+[Seat:*]
+greeter-session=slick-greeter
+user-session=cinnamon
+greeter-hide-users=false
+allow-guest=false
+EOF
+
+# ====================
+# 6. НАСТРОЙКА GRUB
+# ====================
+#!/bin/bash
+# 05-grub-config.sh
+
+mkdir -p /boot/grub/themes/smartos/
+mkdir -p /usr/share/images/grub/
+
+convert -size 1920x1080 gradient:#36B5B0-#1A237E \
+    -fill white -pointsize 72 -gravity center \
+    -draw "text 0,0 'SmartOS'" \
+    PNG24:/boot/grub/themes/smartos/background.png 2>/dev/null || true
+
+cat > /boot/grub/grub.cfg << 'GRUB_CFG'
+set timeout=10
+set default=0
+menuentry "SmartOS Live" {
+    linux /casper/vmlinuz boot=casper quiet splash --
+    initrd /casper/initrd
+}
+menuentry "SmartOS (compatibility mode)" {
+    linux /casper/vmlinuz boot=casper quiet splash nomodeset --
+    initrd /casper/initrd
+}
+GRUB_CFG
+
+cat > /etc/default/grub << 'GRUB_DEFAULT'
+GRUB_DEFAULT=0
+GRUB_TIMEOUT=10
+GRUB_DISTRIBUTOR="SmartOS"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+GRUB_CMDLINE_LINUX=""
+GRUB_BACKGROUND="/boot/grub/themes/smartos/background.png"
+GRUB_DISABLE_OS_PROBER=true
+GRUB_TIMEOUT_STYLE=menu
+GRUB_DEFAULT
+
+# ====================
+# 7. СИСТЕМНЫЕ ФАЙЛЫ
+# ====================
+#!/bin/bash
+# 06-system-files.sh
+
+cat > /etc/os-release << 'OS_RELEASE'
+NAME="SmartOS"
+VERSION="1.0 Quantum"
+ID=smartos
+ID_LIKE=ubuntu debian
+PRETTY_NAME="SmartOS 1.0 Quantum"
+VERSION_ID="1.0"
+HOME_URL="https://smartos.org"
+SUPPORT_URL="https://support.smartos.org"
+BUG_REPORT_URL="https://bugs.smartos.org"
+VERSION_CODENAME=quantum
+UBUNTU_CODENAME=noble
+SMARTOS_VENDOR="Pantheon Development"
+SMARTOS_VENDOR_URL="https://pantheon.dev"
+OS_RELEASE
+
+cat > /etc/lsb-release << 'LSB_RELEASE'
+DISTRIB_ID=SmartOS
+DISTRIB_RELEASE=1.0
+DISTRIB_CODENAME=quantum
+DISTRIB_DESCRIPTION="SmartOS 1.0 Quantum"
+LSB_RELEASE
+
+echo "SmartOS 1.0 Quantum \\n \\l" > /etc/issue
+echo "SmartOS 1.0 Quantum" > /etc/issue.net
+echo "smartos-live" > /etc/hostname
+sed -i 's/mint/smartos-live/g' /etc/hosts
+
+mkdir -p /cdrom/.disk/
+echo "SmartOS Live CD/DVD" > /cdrom/.disk/info
+echo "smartos" > /cdrom/.disk/cd_type
+
+# ====================
+# 8. ЭКРАН ПРИВЕТСТВИЯ
+# ====================
+#!/bin/bash
+# 07-welcome-screen.sh
+
+mkdir -p /usr/share/pantheon/welcome/
+
+cat > /usr/share/pantheon/welcome/index.html << 'WELCOME_HTML'
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Добро пожаловать в SmartOS</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #36B5B0, #1A237E);
+            color: white;
+            font-family: 'Ubuntu', sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .logo { font-size: 72px; margin: 20px; }
+        h1 { font-size: 48px; margin-bottom: 20px; }
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #36B5B0;
+            padding: 15px 30px;
+            margin: 10px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">⚡</div>
+    <h1>SmartOS 1.0 Quantum</h1>
+    <p>Добро пожаловать в вашу новую операционную систему!</p>
+    <div>
+        <a href="system-settings://" class="btn">Настройки</a>
+        <a href="software://" class="btn">Программы</a>
+        <a href="https://pantheon.dev" class="btn" target="_blank">Сайт</a>
+    </div>
+</body>
+</html>
+WELCOME_HTML
+
+cat > /etc/xdg/autostart/smartos-welcome.desktop << 'DESKTOP'
+[Desktop Entry]
+Type=Application
+Name=SmartOS Welcome
+Comment=Welcome screen for SmartOS
+Exec=xdg-open /usr/share/pantheon/welcome/index.html
+Icon=start-here
+Terminal=false
+StartupNotify=false
+X-GNOME-Autostart-enabled=true
+DESKTOP
+
+mkdir -p /etc/skel/.config/autostart/
+cp /etc/xdg/autostart/smartos-welcome.desktop /etc/skel/.config/autostart/
+
+# ====================
+# 9. ОЧИСТКА СИСТЕМЫ
+# ====================
+#!/bin/bash
+# 99-cleanup.sh
+
+apt-get autoremove -y
+apt-get clean
+rm -rf /var/lib/apt/lists/*
+rm -rf /tmp/* /var/tmp/*
+rm -f /root/.bash_history
+rm -f /home/*/.bash_history 2>/dev/null
+find /var/log -type f -name "*.log" -exec truncate -s 0 {} \;
+update-desktop-database /usr/share/applications/
+gtk-update-icon-cache /usr/share/icons/hicolor/ 2>/dev/null || true
+
+# ====================
+# КОНЕЦ СКРИПТОВ
+# ====================
