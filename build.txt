@@ -14,7 +14,7 @@
 # build.sh - основной скрипт сборки
 
 set -e
-echo "SmartOS 1.0 Quantum Build System"
+echo "SmartOS 2.0 Quantum Build System"
 apt-get update
 apt-get install -y imagemagick desktop-file-utils sed
 
