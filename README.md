@@ -1,169 +1,171 @@
-# 🧠 SmartOS 2.0 Quantum
+# SmartOS™
 
 ---
 
-## EN
+## 🇬🇧 ENGLISH
 
-### About the project
+**SmartOS™** is an author-owned open-source operating system project with protected name and branding.
 
-**SmartOS 2.0 Quantum** is an **author-owned open-source operating system** developed and maintained by the **SmartOS Project**, based on **Linux Mint**.
-
-SmartOS is an original software project with its own vision of system design, architecture, and future development.  
-Although the source code is open, **authorship and copyright belong to the SmartOS Project**.
+SmartOS is developed and maintained by **SmartOS Project**.
 
 ---
 
-### 🏷 Project Ownership
+### 🚀 About the Project
 
-- **Author & Copyright Holder:** SmartOS Project  
-- **Project Name:** SmartOS / SmartOS 2.0 Quantum  
-- **Project Type:** Author-owned open-source software  
+SmartOS is a modern, fast, and aesthetically focused operating system based on Linux technologies.
+The project aims to provide a clean, secure, and user-friendly desktop experience while remaining fully transparent at the source code level.
 
----
-
-### ✨ Features
-
-- ⚡ Fast and lightweight operating system
-- 🎨 Modern and clean UI concept
-- 🧩 Based on Linux Mint (stable and reliable base)
-- 🔐 Open-source with preserved authorship
-- 🛠️ Developed and maintained by the SmartOS Project
+The project is open-source **by design**, but remains **author-owned**.
 
 ---
 
-### 📦 Project Status
+### 📜 Licensing Overview
 
-> 🚧 **Work in progress**  
-SmartOS is under active development. Some features may be incomplete or experimental.
+#### Source Code
 
----
+The SmartOS source code is licensed under the **GNU General Public License v3.0 (GPL-3.0)**.
 
-### 📜 License & Rights
+You are free to:
 
-SmartOS is licensed under the  
-**GNU General Public License v3.0 (GPL-3.0)**.
+* Use the source code
+* Study how it works
+* Modify the source code
+* Share modified versions of the source code
 
-This means:
-- You are free to use, study, and modify the source code
-- Any redistributed or modified versions must remain open-source
-- **Authorship and copyright remain with the SmartOS Project**
-- The name **SmartOS** refers to the original author-owned project
-
-See the `LICENSE` file for details.
+**These freedoms apply to the source code only** and do not grant any rights to the SmartOS name, branding, or official ISO images.
 
 ---
 
-### © Copyright
+### 📀 Official Builds (ISO)
 
-Copyright (c) 2026 **SmartOS Project**  
-SmartOS is an author-owned software project.  
-All rights reserved under the GPL-3.0 license.
+SmartOS ISO images are **official builds** of SmartOS Project.
 
----
+❌ Redistribution of SmartOS ISO images, modified or unmodified, is **prohibited** without explicit written permission from SmartOS Project.
 
-### 🌐 Project Links
-
-- 🌍 Official website: https://smartos-ptoject.ru  
-- 📂 Official repository: SmartOS Project  
+This includes any mirrors, reuploads, or third-party distributions claiming to be official.
 
 ---
 
-### 🤝 Contributing
+### 🏷️ Trademark Notice
 
-Contributions and suggestions are welcome.  
-By contributing, you agree that:
-- The project authorship remains with the **SmartOS Project**
-- All contributions are licensed under GPL-3.0
+**SmartOS™** is a trademark of **SmartOS Project**.
 
----
+The SmartOS name, logo, and branding:
 
-### ⚠️ Disclaimer
+* may not be used without permission
+* may not be used to name forks or derivative distributions
+* may not be used in a way that implies official status or endorsement
 
-SmartOS is provided **“as is”**, without any warranty.  
-The SmartOS Project is not responsible for any damage or data loss caused by the use of this software.
+Forks of the source code are permitted under GPL-3.0, but must:
 
----
-### See LEGAL.md for licensing, trademark, and ISO distribution terms.
-
----
-
-## RU
-
-### О проекте
-
-**SmartOS 2.0 Quantum** — это **авторская операционная система с открытым исходным кодом**, разрабатываемая и поддерживаемая **SmartOS Project**, основанная на **Linux Mint**.
-
-SmartOS является **оригинальным программным обеспечением** с собственным видением дизайна, архитектуры и развития системы.  
-Несмотря на открытый исходный код, **авторство и copyright принадлежат SmartOS Project**.
+* Use a different name
+* Use different branding
+* Clearly state that they are not affiliated with SmartOS Project
 
 ---
 
-### 🏷 Автор и правообладатель
+### ⚖️ Legal Information
 
-- **Автор и владелец прав:** SmartOS Project  
-- **Название проекта:** SmartOS / SmartOS 2.0 Quantum  
-- **Тип проекта:** Авторское программное обеспечение (Open Source)  
+For detailed legal terms, including licensing, trademark policy, and ISO distribution rules, see:
 
----
-
-### ✨ Возможности
-
-- ⚡ Быстрая и лёгкая операционная система
-- 🎨 Современная и аккуратная концепция интерфейса
-- 🧩 Основана на Linux Mint (стабильная и надёжная база)
-- 🔐 Открытый исходный код с сохранением авторства
-- 🛠️ Разработка и сопровождение SmartOS Project
+➡️ **LEGAL.md**
 
 ---
 
-### 📦 Статус проекта
+### 🌐 Official Links
 
-> 🚧 **В разработке**  
-SmartOS находится в активной стадии разработки. Некоторые функции могут быть неполными или экспериментальными.
-
----
-
-### 📜 Лицензия и права
-
-SmartOS распространяется под лицензией  
-**GNU General Public License v3.0 (GPL-3.0)**.
-
-Это означает:
-- Разрешено использование, изучение и модификация исходного кода
-- Любые модифицированные или распространяемые версии должны оставаться с открытым исходным кодом
-- **Авторство и copyright принадлежат SmartOS Project**
-- Название проекта **SmartOS** относится к оригинальному авторскому ПО
-
-Подробности см. в файле `LICENSE`.
+* Website: [https://smartos-project.ru](https://smartos-project.ru)
+* Source code repository: this repository
 
 ---
 
 ### © Copyright
 
-Copyright (c) 2026 **SmartOS Project**  
-SmartOS — авторский программный проект.  
-Все права защищены в рамках лицензии GPL-3.0.
+© SmartOS Project. All rights reserved.
+
+SmartOS™ is a trademark of SmartOS Project.
 
 ---
 
-### 🌐 Ссылки проекта
+## 🇷🇺 RUSSIAN / РУССКИЙ
 
-- 🌍 Официальный сайт: https://smartos-ptoject.ru  
-- 📂 Официальный репозиторий SmartOS  
+**SmartOS™** — это авторский open-source проект операционной системы с защищённым названием и брендингом.
 
----
-
-### 🤝 Участие в разработке
-
-Вклад в проект приветствуется, однако:
-- Авторство проекта сохраняется за **SmartOS Project**
-- Все изменения должны соответствовать лицензии GPL-3.0
-
-Pull requests и предложения приветствуются.
+Проект SmartOS разрабатывается и поддерживается **SmartOS Project**.
 
 ---
 
-### ⚠️ Отказ от ответственности
+### 🚀 О проекте
 
-SmartOS распространяется **«как есть»**, без каких-либо гарантий.  
-SmartOS Project не несёт ответственности за возможные последствия использования программного обеспечения.
+SmartOS — современная, быстрая и визуально аккуратная операционная система на базе Linux-технологий.
+Цель проекта — предоставить чистую, безопасную и удобную пользовательскую среду при полной открытости исходного кода.
+
+Проект является open-source **по архитектуре**, но остаётся **авторским**.
+
+---
+
+### 📜 Лицензирование
+
+#### Исходный код
+
+Исходный код SmartOS распространяется на условиях лицензии **GNU General Public License v3.0 (GPL-3.0)**.
+
+Разрешается:
+
+* использовать исходный код
+* изучать его работу
+* модифицировать исходный код
+* распространять модифицированные версии исходного кода
+
+**Данные права распространяются исключительно на исходный код** и не предоставляют прав на использование названия SmartOS, брендинга или официальных ISO-образов.
+
+---
+
+### 📀 Официальные сборки (ISO)
+
+ISO-образы SmartOS являются **официальными сборками** проекта SmartOS Project.
+
+❌ Распространение ISO-образов SmartOS, в изменённом или неизменённом виде, **запрещено** без явного письменного разрешения SmartOS Project.
+
+Запрет распространяется на зеркала, повторные загрузки и сторонние дистрибутивы, заявляющие себя как официальные.
+
+---
+
+### 🏷️ Товарный знак (Trademark)
+
+**SmartOS™** является товарным знаком **SmartOS Project**.
+
+Название SmartOS, логотип и элементы брендинга:
+
+* не могут использоваться без разрешения
+* не могут использоваться для наименования форков и производных дистрибутивов
+* не могут использоваться таким образом, который создаёт впечатление официального статуса или одобрения
+
+Форки исходного кода допускаются в рамках лицензии GPL-3.0, но обязаны:
+
+* использовать другое название
+* использовать другой брендинг
+* явно указывать, что проект не связан с SmartOS Project
+
+---
+
+### ⚖️ Правовая информация
+
+Подробные условия лицензирования, политики товарного знака и распространения ISO см. в файле:
+
+➡️ **LEGAL.md**
+
+---
+
+### 🌐 Официальные ссылки
+
+* Сайт: [https://smartos-project.ru](https://smartos-project.ru)
+* Репозиторий с исходным кодом: данный репозиторий
+
+---
+
+### © Авторские права
+
+© SmartOS Project. Все права защищены.
+
+SmartOS™ является товарным знаком SmartOS Project.
