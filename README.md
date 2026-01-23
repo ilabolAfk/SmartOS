@@ -83,6 +83,7 @@ SmartOS is provided **“as is”**, without any warranty.
 The SmartOS Project is not responsible for any damage or data loss caused by the use of this software.
 
 ---
+### See LEGAL.md for licensing, trademark, and ISO distribution terms.
 
 ---
 
