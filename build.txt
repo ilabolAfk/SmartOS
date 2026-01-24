@@ -297,3 +297,5 @@ gtk-update-icon-cache /usr/share/icons/hicolor/ 2>/dev/null || true
 # ====================
 # КОНЕЦ СКРИПТОВ
 # ====================
+Copyright (c) 2026 SmartOS Project
+Author: ilabolAfk
