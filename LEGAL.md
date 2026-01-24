@@ -1,4 +1,7 @@
 # LEGAL NOTICE / ПРАВОВАЯ ИНФОРМАЦИЯ
+### Forks of SmartOS code are permitted under GPL-3.0,
+### BUT must not use the name SmartOS, branding, or claim authorship.
+### Commercial redistribution must credit SmartOS Project.
 
 ---
 
